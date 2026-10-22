@@ -1,0 +1,78 @@
+Projet Power BI — Suivi logistique
+
+ Présentation
+
+Ce projet présente un tableau de bord Power BI destiné au suivi des commandes et des livraisons d’une entreprise de logistique. Il permet d’explorer les trajets entre villes, les statuts des commandes, les chauffeurs affectés, les camions utilisés, le poids transporté et les salaires estimés.
+
+Les données fournies dans cette démonstration sont fictives.
+
+ Objectifs
+
+- Suivre le nombre de commandes et leur état d’avancement.
+- Repérer les commandes qui attendent encore un chauffeur ou un camion.
+- Examiner les trajets entre les villes de départ et d’arrivée.
+- Suivre les chauffeurs et les camions associés aux livraisons.
+- Estimer le salaire lié aux heures de trajet enregistrées.
+
+ Indicateurs et analyses
+
+Le rapport peut inclure les indicateurs suivants :
+
+- Nombre total de commandes.
+- Nombre de livraisons terminées.
+- Nombre de commandes non assignées.
+- Poids total des commandes, en kilogrammes.
+- Heures de trajet enregistrées.
+- Salaire estimé par chauffeur et au total.
+- Répartition des commandes par statut, ville ou chauffeur.
+
+Le salaire estimé est calculé à partir des heures de trajet enregistrées, au taux horaire indiqué dans les données :
+
+```DAX
+Salaire estimé ($) =
+SUMX(
+    Livraisons,
+    Livraisons[heures_trajet] * Livraisons[salaire_horaire_usd]
+)
+```
+
+ Structure des données
+
+La table `Livraisons` contient notamment les colonnes suivantes :
+
+| Colonne | Description |
+|---|---|
+| `commande_id` | Identifiant de la commande |
+| `client` | Nom ou identifiant du client |
+| `ville_depart` | Ville de départ |
+| `ville_arrivee` | Ville de livraison |
+| `poids_kg` | Poids de la commande en kilogrammes |
+| `statut_commande` | État général de la commande |
+| `chauffeur_id`, `chauffeur` | Identifiant et nom du chauffeur affecté |
+| `camion_id`, `immatriculation` | Identifiant et immatriculation du camion affecté |
+| `capacite_kg` | Capacité du camion en kilogrammes |
+| `heures_trajet` | Heures de trajet enregistrées |
+| `salaire_horaire_usd` | Taux horaire du chauffeur en dollars |
+| `statut_livraison` | État de la livraison |
+
+ Ouvrir le projet
+
+1. Télécharger le fichier Power BI `.pbix` depuis ce dépôt.
+2. Ouvrir le fichier avec **Power BI Desktop**.
+3. Utiliser les segments et les filtres du rapport pour explorer les commandes, les chauffeurs, les villes et les statuts.
+
+ Données et limites
+
+Les données de démonstration sont fictives et ne représentent pas l’activité réelle d’une entreprise. Les salaires estimés utilisent uniquement les heures de trajet présentes dans les données ; ils ne prennent pas en compte les heures de chargement, d’attente, les pauses, les heures supplémentaires, les frais ou les règles de paie locales.
+
+Pour une analyse opérationnelle, remplacer les exemples par des données autorisées et actualisées. Éviter de publier des données personnelles ou confidentielles dans un dépôt public.
+
+ Outils
+
+- Microsoft Power BI Desktop
+- Power Query pour l’importation et la préparation des données
+- DAX pour les mesures et indicateurs
+
+ Auteur
+
+Projet de démonstration — suivi logistique avec Power BI.
